@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipbook Viewer</title>
+    
+    <!-- DearFlip CSS -->
+    <link href="dflip/css/dflip.min.css" rel="stylesheet">
+    
+    <style>
+        /* Base Styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Prevent scrollbars in iframe */
+        }
+        
+        /* Flipbook Container */
+        .df-book-container {
+            width: 100vw; /* Full viewport width */
+            height: 100vh; /* Full viewport height */
+            position: relative;
+        }
+        
+        /* Hide default license indicator */
+        .df-license { display: none !important; }
+    </style>
+</head>
+<body>
+    <!-- Flipbook Container (uses viewport units) -->
+    <div class="df-book-container">
+        <div class="_df_book" 
+             id="mainFlipbook" 
+             source="https://a91ca9fe-6d24-428b-a38c-a16ea540b508.usrfiles.com/ugd/a91ca9_76e02364989e482880dc21d395e8b7ed.pdf"
+             style="width:100%;height:100%;"></div>
+    </div>
+
+    <!-- Required Libraries -->
+    <script src="dflip/js/libs/jquery.min.js"></script>
+    <script src="dflip/js/dflip.min.js"></script>
+    
+    <!-- Configuration -->
+    <script>
+        var option_mainFlipbook = {
+            webgl: true,
+            height: "100%",  // Uses container height
+            width: "100%",   // Uses container width
+            autoEnableOutline: false,
+            backgroundColor: "#ffffff",
+            enableFullscreen: false, // Disabled for iframe safety
+            afterPageLoaded: function() {
+                // Force redraw to prevent rendering issues
+                setTimeout(function(){
+                    window.dispatchEvent(new Event('resize'));
+                }, 100);
+            }
+        };
+    </script>
+</body>
+</html>
